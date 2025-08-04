@@ -17,7 +17,7 @@ commonname=none
 email=adamspx17@gmail.com
 
 # simple password minimal
-curl -sS https://raw.githubusercontent.com/zhets/sc/main/ssh/password | openssl aes-256-cbc -d -a -pass pass:scvps07gg -pbkdf2 > /etc/pam.d/common-password
+curl -sS https://raw.githubusercontent.com/Kabut27/sc/main/ssh/password | openssl aes-256-cbc -d -a -pass pass:scvps07gg -pbkdf2 > /etc/pam.d/common-password
 chmod +x /etc/pam.d/common-password
 
 # go to root
@@ -67,8 +67,8 @@ apt-get remove --purge exim4 -y
 apt -y install shc
 apt-get install figlet -y
 
-# set time GMT +7
-ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+# set time GMT +3
+ln -fs /usr/share/zoneinfo/Africa/Nairobi /etc/localtime
 
 # set locale
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
@@ -113,13 +113,13 @@ apt -y install nginx
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/zhets/sc/main/ssh/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Kabut27/sc/main/ssh/nginx.conf"
 mkdir -p /home/vps/public_html
 /etc/init.d/nginx restart
 
 # install badvpn
 cd
-wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/zhets/sc/main/ssh/newudpgw"
+wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/Kabut27/sc/main/ssh/newudpgw"
 chmod +x /usr/bin/badvpn-udpgw
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500' /etc/rc.local
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500' /etc/rc.local
@@ -228,13 +228,13 @@ echo 'Please send in your comments and/or suggestions to zaf@vsnl.com'
 # banner /etc/issue.net
 sleep 1
 echo -e "[ ${green}INFO$NC ] Settings banner"
-wget -q -O /etc/issue.net "https://raw.githubusercontent.com/zhets/sc/main/issue.net"
+wget -q -O /etc/issue.net "https://raw.githubusercontent.com/Kabut27/sc/main/issue.net"
 chmod +x /etc/issue.net
 echo "Banner /etc/issue.net" >> /etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
 
 #install bbr dan optimasi kernel
-wget https://raw.githubusercontent.com/zhets/sc/main/ssh/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+wget https://raw.githubusercontent.com/Kabut27/sc/main/ssh/bbr.sh && chmod +x bbr.sh && ./bbr.sh
 
 # blockir torrent
 iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
@@ -254,7 +254,7 @@ netfilter-persistent save
 netfilter-persistent reload
 
 cd /usr/bin
-wget -q -O limit-ssh "https://raw.githubusercontent.com/zhets/sc/main/limit/limit-ssh"
+wget -q -O limit-ssh "https://raw.githubusercontent.com/Kabut27/sc/main/limit/limit-ssh"
 chmod +x limit-ssh
 cd
 
